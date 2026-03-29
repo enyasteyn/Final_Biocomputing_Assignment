@@ -23,3 +23,5 @@ A random SNP was selected from the vcf file.
 Bam file and .bai file was uploaded to IGV to visualise the vcf file as well as the genome file.
 
 The following visualisation was seen on IGV:
+<img width="1565" height="693" alt="image" src="https://github.com/user-attachments/assets/9e0f3b1c-7ef5-4417-b632-513815a7df28" />
+
