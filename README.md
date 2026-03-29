@@ -1,1 +1,3 @@
-# This is my repository for my final biocomputing assignment
+# Bio Computing Assignment Workflow
+
+# Contents
