@@ -1,5 +1,5 @@
 # Bio Computing Assignment Workflow
-This project implements a reproducible bioinformatics workflow. This pipeline includes building a container, using nextflow for read trimming, alignment, and variant calling. Variants were queried on Intergrative Genomics Viewer (IGV), a structured variant database was created using sqlite3 and files were pulled from cmd.
+This project implements a reproducible bioinformatics workflow. This pipeline includes building a container, using nextflow for read trimming, alignment, and variant calling. Variants were validated on Intergrative Genomics Viewer (IGV), a structured variant database was created using sqlite3 and files were pulled from cmd.
 
 # Container
 For this workflow, I created a container for trimmomatic using singularity. A singularity definition file ('trimmomatic.def') was created, which includes the required labels, environment setup, and installation of trimmomatic.
@@ -15,13 +15,33 @@ The workflow is implemented using nextflow and consists of the following steps:
 3. Sequence alignment using BWA-MEM against the reference genome.
 4. Conversion and sorting using samtools to produce sorted BAM files.
 5. Variant Calling using BCFTOOLS_CALL to generate raw variant calls in bcf format.
-6. Variant Filtering using CALL_VAR to produce high-quality SNPs in vcf format.
+6. Variant Filtering using CALL_VAR to produce high-quality single nucleotide polymorphisms (SNPs) in vcf format.
 
-# Confirm efficient Variant Calling
-A random SNP was selected from the vcf file.
+# Variant Validation
+To confirm the accuracy of the variant calling step, a random SNP from the vcf file and visualised using IGV.
 
-Bam file and .bai file was uploaded to IGV to visualise the vcf file as well as the genome file.
+The BAM file, along with its index (.bai) and the reference genome (chr19), were loaded in IGV.
 
 The following visualisation was seen on IGV:
 <img width="1565" height="693" alt="image" src="https://github.com/user-attachments/assets/9e0f3b1c-7ef5-4417-b632-513815a7df28" />
+**Figure 1:** IGV visualisation of a SNP on chromosome 19 at position 5,461,428.
 
+At the genomic position 5,461,428, a clear SNP was observed which is highlighted in red. The variation shows the reference base, T, changing to a C.
+Multiple aligned reads show a consistent base different from the reference sequence at this position.
+
+# Structured variant database
+A sqlite3 database was created and called variants.db.
+
+The variants table was created using the following fields:
+chromosome TEXT - The chromosome identifier
+position INTEGER - The location of the SNP on the chromosome
+ref_allele TEXT - The base from the reference genome
+alt_allele TEXT - The base from the vcf file
+quality REAL - The phred score as a real number
+
+The vcf file was converted to a tsv file to extract the data and store it in the database using te following command:
+
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\n' variants.vcf > variants.tsv
+
+# Usuage
+This workflow was executed using provided data and reference files
