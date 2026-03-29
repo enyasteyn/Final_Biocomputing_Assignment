@@ -10,8 +10,16 @@ singularity build --fakeroot trimmomatic.sif trimmomatic.def
 
 # Nextflow Pipeline
 The workflow is implemented using nextflow and consists of the following steps:
-1. Quality Control using FastQC
-2. Trimming using TRIMMOMATIC
-3. Sequence alignment using BWA-MEM
-4. Sorting using SAM-TO-BAM
-5. 
+1. Quality Control using FastQC to assess the raw read quality. The output was a html file.
+2. Read trimming using Trimmomatic to remove any low-quality reads and adapters. Container was included in the nextflow.config to integrate it into the workflow.
+3. Sequence alignment using BWA-MEM against the reference genome.
+4. Conversion and sorting using samtools to produce sorted BAM files.
+5. Variant Calling using BCFTOOLS_CALL to generate raw variant calls in bcf format.
+6. Variant Filtering using CALL_VAR to produce high-quality SNPs in vcf format.
+
+# Confirm efficient Variant Calling
+A random SNP was selected from the vcf file.
+
+Bam file and .bai file was uploaded to IGV to visualise the vcf file as well as the genome file.
+
+The following visualisation was seen on IGV:
