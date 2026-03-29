@@ -1,8 +1,8 @@
 # Bio Computing Assignment Workflow
-This project implements a reproducible bioinformatics workflow. This pipeline includes building a container, using nextflow for read trimming, alignment, and variant calling. Variants were validated on Intergrative Genomics Viewer (IGV), a structured variant database was created using sqlite3 and files were pulled from cmd.
+This project implements a reproducible bioinformatics workflow. This pipeline includes building a container, using nextflow for read trimming, alignment, and variant calling. Variants were validated on Integrative Genomics Viewer (IGV), a structured variant database was created using sqlite3 and files were pulled from cmd.
 
 # Container
-For this workflow, I created a container for trimmomatic using singularity. A singularity definition file ('trimmomatic.def') was created, which includes the required labels, environment setup, and installation of trimmomatic.
+For this workflow, I created a container for TRIMMOMATIC using singularity. A singularity definition file ('trimmomatic.def') was created, which includes the required labels, environment setup, and installation of TRIMMOMATIC.
 
 The container was then built using:
 
@@ -11,7 +11,7 @@ singularity build --fakeroot trimmomatic.sif trimmomatic.def
 # Nextflow Pipeline
 The workflow is implemented using nextflow and consists of the following steps:
 1. Quality Control using FastQC to assess the raw read quality. The output was a html file.
-2. Read trimming using Trimmomatic to remove any low-quality reads and adapters. Container was included in the nextflow.config to integrate it into the workflow.
+2. Read trimming using TRIMMOMATIC to remove any low-quality reads and adapters. Container was included in the nextflow.config to integrate it into the workflow.
 3. Sequence alignment using BWA-MEM against the reference genome.
 4. Conversion and sorting using samtools to produce sorted BAM files.
 5. Variant Calling using BCFTOOLS_CALL to generate raw variant calls in bcf format.
@@ -26,8 +26,8 @@ The following visualisation was seen on IGV:
 <img width="1565" height="693" alt="image" src="https://github.com/user-attachments/assets/9e0f3b1c-7ef5-4417-b632-513815a7df28" />
 **Figure 1:** IGV visualisation of a SNP on chromosome 19 at position 5,461,428.
 
-At the genomic position 5,461,428, a clear SNP was observed which is highlighted in red. The variation shows the reference base, T, changing to a C.
-Multiple aligned reads show a consistent base different from the reference sequence at this position.
+At the genomic position 5,461,428, a clear SNP was observed which is highlighted in red. This variation shows the reference base, T, changing to a C.
+Multiple aligned reads show a consistent base different from the reference sequence at this position confirmming the accuracy of variant calling.
 
 # Structured variant database
 A sqlite3 database was created and called variants.db.
@@ -39,9 +39,11 @@ ref_allele TEXT - The base from the reference genome
 alt_allele TEXT - The base from the vcf file
 quality REAL - The phred score as a real number
 
-The vcf file was converted to a tsv file to extract the data and store it in the database using te following command:
+The vcf file was converted to a tsv file to extract the data and store it in the database using the following commands:
 
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\n' variants.vcf > variants.tsv
+.mode tab
+.import variants.tsv variants
 
-# Usuage
-This workflow was executed using provided data and reference files
+# Usage
+This workflow was executed using provided data and reference files.
