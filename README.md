@@ -38,15 +38,15 @@ A sqlite3 database was created and called variants.db.
 
 The variants table was created using the following fields:
 
-chromosome TEXT - The chromosome identifier
+chromosome TEXT - Chromosome identifier
 
-position INTEGER - The location of the SNP on the chromosome
+position INTEGER - SNP location on the chromosome
 
-ref_allele TEXT - The base from the reference genome
+ref_allele TEXT - Reference genomic base
 
-alt_allele TEXT - The base from the vcf file
+alt_allele TEXT - Alternate base from vcf file
 
-quality REAL - The phred score as a real number
+quality REAL - Phred score
 
 The vcf file was converted to a tsv file to extract the data and store it in the database using the following commands:
 
