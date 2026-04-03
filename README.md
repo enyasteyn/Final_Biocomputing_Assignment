@@ -17,6 +17,9 @@ The workflow is implemented using nextflow and consists of the following steps:
 5. Variant Calling using BCFTOOLS_CALL to generate raw variant calls in bcf format.
 6. Variant Filtering using CALL_VAR to produce high-quality single nucleotide polymorphisms (SNPs) in vcf format.
 
+The pipeline was implemented using:
+ ./nextflow run -profile local main.nf
+
 # Variant Validation
 To confirm the accuracy of the variant calling step, a random SNP from the vcf file and visualised using IGV.
 
