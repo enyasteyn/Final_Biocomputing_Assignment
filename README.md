@@ -18,6 +18,7 @@ The workflow is implemented using nextflow and consists of the following steps:
 6. Variant Filtering using CALL_VAR to produce high-quality single nucleotide polymorphisms (SNPs) in vcf format.
 
 The pipeline was implemented using:
+
  ./nextflow run -profile local main.nf
 
 # Variant Validation
@@ -45,7 +46,9 @@ quality REAL - The phred score as a real number
 The vcf file was converted to a tsv file to extract the data and store it in the database using the following commands:
 
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\n' variants.vcf > variants.tsv
+
 .mode tab
+
 .import variants.tsv variants
 
 # Usage
