@@ -1,5 +1,5 @@
 # Bio Computing Assignment Workflow
-This project implements a reproducible bioinformatics workflow. This pipeline includes building a container, using nextflow for read trimming, alignment, and variant calling. Variants were validated on Integrative Genomics Viewer (IGV), a structured variant database was created using sqlite3 and files were pulled from cmd.
+This project implements a reproducible bioinformatics workflow. This pipeline includes building a container, using nextflow for read trimming, alignment, and variant calling. Variants were validated on Integrative Genomics Viewer (IGV), and a structured variant database was created using sqlite3.
 
 # Container
 For this workflow, I created a container for TRIMMOMATIC using singularity. A singularity definition file ('trimmomatic.def') was created, which includes the required labels, environment setup, and installation of TRIMMOMATIC.
